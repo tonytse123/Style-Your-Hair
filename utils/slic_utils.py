@@ -177,7 +177,7 @@ def slic_custom(image, n_segments=100, compactness=10., max_iter=10, sigma=0,
     # initialize cluster centroids for desired number of segments
     update_centroids = False
     if use_mask:
-        mask = np.ascontiguousarray(mask, dtype=np.bool).view('uint8')
+        mask = np.ascontiguousarray(mask, dtype=bool).view('uint8')
         if mask.ndim == 2:
             mask = np.ascontiguousarray(mask[np.newaxis, ...])
         if mask.shape != image.shape[:3]:
@@ -200,7 +200,7 @@ def slic_custom(image, n_segments=100, compactness=10., max_iter=10, sigma=0,
     elif isinstance(spacing, (list, tuple)):
         spacing = np.ascontiguousarray(spacing, dtype=dtype)
 
-    if not isinstance(sigma, coll.Iterable):
+    if not isinstance(sigma, coll.abc.Iterable):
         sigma = np.array([sigma, sigma, sigma], dtype=dtype)
         sigma /= spacing.astype(dtype)
     elif isinstance(sigma, (list, tuple)):
